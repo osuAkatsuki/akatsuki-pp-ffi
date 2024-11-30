@@ -132,7 +132,7 @@ fn calculate_performance(
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn calculate_score(
+pub unsafe extern "C" fn calculate_performance_from_path(
     beatmap_path: *const c_char,
     mode: u32,
     mods: u32,
@@ -162,7 +162,7 @@ pub unsafe extern "C" fn calculate_score(
 
 #[ffi_function]
 #[no_mangle]
-pub unsafe extern "C" fn calculate_score_bytes(
+pub unsafe extern "C" fn calculate_performance_from_bytes(
     beatmap_bytes: FFISlice<u8>,
     mode: u32,
     mods: u32,
@@ -193,8 +193,8 @@ pub unsafe extern "C" fn calculate_score_bytes(
 pub fn my_inventory() -> Inventory {
     InventoryBuilder::new()
         .register(extra_type!(CalculatePerformanceResult))
-        .register(function!(calculate_score))
-        .register(function!(calculate_score_bytes))
+        .register(function!(calculate_performance_from_path))
+        .register(function!(calculate_performance_from_bytes))
         .inventory()
 }
 

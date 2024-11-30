@@ -50,9 +50,9 @@ typedef struct sliceu8
     } sliceu8;
 
 
-calculateperformanceresult calculate_score(const int8_t* beatmap_path, uint32_t mode, uint32_t mods, uint32_t max_combo, optionf64 accuracy, optionu32 count_300, optionu32 count_100, optionu32 count_50, uint32_t miss_count, optionu32 passed_objects);
+calculateperformanceresult calculate_performance_from_path(const int8_t* beatmap_path, uint32_t mode, uint32_t mods, uint32_t max_combo, optionf64 accuracy, optionu32 count_300, optionu32 count_100, optionu32 count_50, uint32_t miss_count, optionu32 passed_objects);
 
-calculateperformanceresult calculate_score_bytes(sliceu8 beatmap_bytes, uint32_t mode, uint32_t mods, uint32_t max_combo, optionf64 accuracy, optionu32 count_300, optionu32 count_100, optionu32 count_50, uint32_t miss_count, optionu32 passed_objects);
+calculateperformanceresult calculate_performance_from_bytes(sliceu8 beatmap_bytes, uint32_t mode, uint32_t mods, uint32_t max_combo, optionf64 accuracy, optionu32 count_300, optionu32 count_100, optionu32 count_50, uint32_t miss_count, optionu32 passed_objects);
 
 
 #ifdef __cplusplus

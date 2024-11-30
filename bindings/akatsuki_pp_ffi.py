@@ -10,22 +10,22 @@ def init_lib(path):
     global c_lib
     c_lib = ctypes.cdll.LoadLibrary(path)
 
-    c_lib.calculate_score.argtypes = [ctypes.POINTER(ctypes.c_int8), ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, Optionf64, Optionu32, Optionu32, Optionu32, ctypes.c_uint32, Optionu32]
-    c_lib.calculate_score_bytes.argtypes = [Sliceu8, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, Optionf64, Optionu32, Optionu32, Optionu32, ctypes.c_uint32, Optionu32]
+    c_lib.calculate_performance_from_path.argtypes = [ctypes.POINTER(ctypes.c_int8), ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, Optionf64, Optionu32, Optionu32, Optionu32, ctypes.c_uint32, Optionu32]
+    c_lib.calculate_performance_from_bytes.argtypes = [Sliceu8, ctypes.c_uint32, ctypes.c_uint32, ctypes.c_uint32, Optionf64, Optionu32, Optionu32, Optionu32, ctypes.c_uint32, Optionu32]
 
-    c_lib.calculate_score.restype = CalculatePerformanceResult
-    c_lib.calculate_score_bytes.restype = CalculatePerformanceResult
+    c_lib.calculate_performance_from_path.restype = CalculatePerformanceResult
+    c_lib.calculate_performance_from_bytes.restype = CalculatePerformanceResult
 
 
 
-def calculate_score(beatmap_path: ctypes.POINTER(ctypes.c_int8), mode: int, mods: int, max_combo: int, accuracy: Optionf64, count_300: Optionu32, count_100: Optionu32, count_50: Optionu32, miss_count: int, passed_objects: Optionu32) -> CalculatePerformanceResult:
-    return c_lib.calculate_score(beatmap_path, mode, mods, max_combo, accuracy, count_300, count_100, count_50, miss_count, passed_objects)
+def calculate_performance_from_path(beatmap_path: ctypes.POINTER(ctypes.c_int8), mode: int, mods: int, max_combo: int, accuracy: Optionf64, count_300: Optionu32, count_100: Optionu32, count_50: Optionu32, miss_count: int, passed_objects: Optionu32) -> CalculatePerformanceResult:
+    return c_lib.calculate_performance_from_path(beatmap_path, mode, mods, max_combo, accuracy, count_300, count_100, count_50, miss_count, passed_objects)
 
-def calculate_score_bytes(beatmap_bytes: Sliceu8 | ctypes.Array[ctypes.c_uint8], mode: int, mods: int, max_combo: int, accuracy: Optionf64, count_300: Optionu32, count_100: Optionu32, count_50: Optionu32, miss_count: int, passed_objects: Optionu32) -> CalculatePerformanceResult:
+def calculate_performance_from_bytes(beatmap_bytes: Sliceu8 | ctypes.Array[ctypes.c_uint8], mode: int, mods: int, max_combo: int, accuracy: Optionf64, count_300: Optionu32, count_100: Optionu32, count_50: Optionu32, miss_count: int, passed_objects: Optionu32) -> CalculatePerformanceResult:
     if hasattr(beatmap_bytes, "_length_") and getattr(beatmap_bytes, "_type_", "") == ctypes.c_uint8:
         beatmap_bytes = Sliceu8(data=ctypes.cast(beatmap_bytes, ctypes.POINTER(ctypes.c_uint8)), len=len(beatmap_bytes))
 
-    return c_lib.calculate_score_bytes(beatmap_bytes, mode, mods, max_combo, accuracy, count_300, count_100, count_50, miss_count, passed_objects)
+    return c_lib.calculate_performance_from_bytes(beatmap_bytes, mode, mods, max_combo, accuracy, count_300, count_100, count_50, miss_count, passed_objects)
 
 
 
